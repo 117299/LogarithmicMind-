@@ -8,13 +8,20 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #000428, #004e92);
+            background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.6) 100%), url('https://www.w3schools.com/w3images/stars.jpg');
+            background-size: cover;
+            background-position: center;
             color: white;
             text-align: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
         }
         header {
             padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            margin-top: 50px;
         }
         header img {
             width: 150px;
@@ -42,6 +49,21 @@
             padding: 10px;
             background: rgba(0, 0, 0, 0.8);
         }
+        @keyframes nebulaMovement {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
+        }
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 50%);
+            animation: nebulaMovement 20s infinite linear;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -54,13 +76,16 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Sign Up</a>
     </nav>
     <main>
         <h2>Discover New Ideas</h2>
-        <p>LogarithmicMind is dedicated to researching math and physics concepts, inventing, and creating innovative ideas.</p>
+        <p>Hello ! I am Junayed Ahmmed(Siam). LogarithmicMind is dedicated to researching math and physics concepts, inventing, and creating innovative ideas.</p>
     </main>
     <footer>
         <p>© 2025 LogarithmicMind</p>
     </footer>
 </body>
 </html>
+
