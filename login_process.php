@@ -1,7 +1,7 @@
 <?php
 $servername = "sql212.infinityfree.com";
 $username = "if0_38178026";
-$password = "myweb4275";
+$password = "rt3YymnSjQ";
 $dbname = "if0_38178026_logarithmicmind_db";
 
 // Create connection
