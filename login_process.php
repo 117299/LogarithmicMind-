@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "logarithmicmind";
+$servername = "sql212.infinityfree.com";
+$username = "if0_38178026";
+$password = "myweb4275";
+$dbname = "if0_38178026_logarithmicmind_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
