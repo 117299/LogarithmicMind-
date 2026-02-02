@@ -7,26 +7,42 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>LogarithmicMind Login</h1>
-    </header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="signup.html">Sign Up</a>
-    </nav>
+    <header><h1>LogarithmicMind Login</h1></header>
+    <nav><a href="index.html">Home</a> | <a href="signup.html">Sign Up</a></nav>
     <main>
-        <form action="login_process.php" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" required><br>
-
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required><br>
-
+        <form id="loginForm">
+            <label>Username:</label><br>
+            <input type="text" id="username" required><br>
+            <label>Password:</label><br>
+            <input type="password" id="password" required><br>
             <button type="submit">Login</button>
         </form>
     </main>
-    <footer>
-        <p>© 2025 LogarithmicMind</p>
-    </footer>
+    <footer><p>© 2025 LogarithmicMind</p></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const _supabase = supabase.createClient('YOUR_PROJECT_URL', 'YOUR_ANON_PUBLIC_KEY');
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            const { data, error } = await _supabase
+                .from('users')
+                .select('*')
+                .eq('username', user)
+                .eq('password', pass)
+                .single();
+
+            if (data) {
+                alert("Login successful! Welcome " + data.username);
+                window.location.href = "index.html";
+            } else {
+                alert("Invalid username or password!");
+            }
+        });
+    </script>
 </body>
 </html>
