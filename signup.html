@@ -7,30 +7,40 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Sign Up for LogarithmicMind</h1>
-    </header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="login.html">Login</a>
-    </nav>
+    <header><h1>Sign Up for LogarithmicMind</h1></header>
+    <nav><a href="index.html">Home</a> | <a href="login.html">Login</a></nav>
     <main>
-        <form action="https://logarithmicmind.infy.uk.com/signup.php" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" required><br>
-
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required><br>
-
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required><br>
-
+        <form id="signupForm">
+            <label>Username:</label><br>
+            <input type="text" id="username" required><br>
+            <label>Email:</label><br>
+            <input type="email" id="email" required><br>
+            <label>Password:</label><br>
+            <input type="password" id="password" required><br>
             <button type="submit">Sign Up</button>
         </form>
     </main>
-    <footer>
-        <p>© 2025 LogarithmicMind</p>
-    </footer>
+    <footer><p>© 2025 LogarithmicMind</p></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const _supabase = supabase.createClient('YOUR_PROJECT_URL', 'YOUR_ANON_PUBLIC_KEY');
+
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const { error } = await _supabase.from('users').insert([
+                { 
+                    username: document.getElementById('username').value,
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value 
+                }
+            ]);
+            if (error) alert("Signup failed: " + error.message);
+            else {
+                alert("Success! Now please login.");
+                window.location.href = "login.html";
+            }
+        });
+    </script>
 </body>
 </html>
-
