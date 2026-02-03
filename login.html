@@ -5,24 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LogarithmicMind - Login</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, #000428, #000000);
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            display: inline-block;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        input {
+            margin: 10px 0;
+            padding: 12px;
+            width: 250px;
+            border-radius: 8px;
+            border: none;
+        }
+        button {
+            padding: 12px 30px;
+            background: #00d2ff;
+            color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <header><h1>LogarithmicMind Login</h1></header>
-    <nav><a href="index.html">Home</a> | <a href="signup.html">Sign Up</a></nav>
+    <h1>Login to the Vault</h1>
     <main>
         <form id="loginForm">
-            <label>Username:</label><br>
-            <input type="text" id="username" required><br>
-            <label>Password:</label><br>
-            <input type="password" id="password" required><br>
+            <input type="text" id="username" placeholder="Username" required><br>
+            <input type="password" id="password" placeholder="Password" required><br>
             <button type="submit">Login</button>
         </form>
+        <p><a href="index.html" style="color: #00d2ff; text-decoration: none;">← Back to Home</a></p>
     </main>
-    <footer><p>© 2025 LogarithmicMind</p></footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const _supabase = supabase.createClient('https://vlzbkxjiwyhmjnkpzbzi.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsemJreGppd3lobWpua3B6YnppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwMzUxMzMsImV4cCI6MjA4NTYxMTEzM30.UDAdKhaPh2BjqXgIMrvYwvXzuXohttUYaLC22ppBrRw');
+        // Replace with your real Supabase details
+        const _supabase = supabase.createClient('YOUR_SUPABASE_URL', 'YOUR_ANON_KEY');
 
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -37,8 +71,12 @@
                 .single();
 
             if (data) {
-                alert("Login successful! Welcome " + data.username);
-                window.location.href = "index.html";
+                // SUCCESS: Store session and REDIRECT
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', data.username);
+                
+                alert("Login successful! Redirecting to your dashboard...");
+                window.location.href = "dashboard.html"; 
             } else {
                 alert("Invalid username or password!");
             }
